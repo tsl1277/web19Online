@@ -38,72 +38,29 @@
 		<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				var oLis=$("#list li")
-				$.each(oLis, function(index) {
-					$(this).hover(function(){
-						var mp3Url="music/"+(index+1)+".mp3"
-						console.log(mp3Url)
-						$("audio").eq(index).attr("src",mp3Url)
-					},function(){
-						$("audio").eq(index).attr("src","")
-					})
-				});
+				let string = '';
+				let audioStr = '';
+				for (let index = 1; index <=7; index ++) {
+					string += `<li>${index}<div class="mask"></div></li>`;
+					audioStr += '<audio autoplay="autoplay"></audio>'
+				}
+				$("#list").html(string);
+				$('#audio').html(audioStr);
+				window.addEventListener('keydown', function(e) {
+					for (let index = 1; index <=7; index ++) {
+						if (e.key == index) {
+							var mp3Url="music/"+(e.key)+".mp3"
+							$("audio").eq(e.key - 1).attr("src",mp3Url)
+						}
+					}
+				})
 			})
 		</script>
 	</head>
 	<body>
 		<div id="wrap">
-			<ul id="list">
-				<li>
-					1
-					<div class="mask"></div>
-				</li>
-				<li>
-					2
-					<div class="mask"></div>
-				</li>
-				<li>
-					3
-					<div class="mask"></div>
-				</li>
-				<li>
-					4
-					<div class="mask"></div>
-				</li>
-				<li>
-					5
-					<div class="mask"></div>
-				</li>
-				<li>
-					6
-					<div class="mask"></div>
-				</li>
-				<li>
-					7
-					<div class="mask"></div>
-				</li>
-			</ul>
+			<ul id="list"></ul>
 		</div>
-		<audio autoplay="autoplay">
-			您的浏览器不支持该标签，请更换或者升级浏览器1
-		</audio>
-		<audio autoplay="autoplay">
-			您的浏览器不支持该标签，请更换或者升级浏览器2
-		</audio>
-		<audio autoplay="autoplay">
-			您的浏览器不支持该标签，请更换或者升级浏览器3
-		</audio>
-		<audio autoplay="autoplay">
-			您的浏览器不支持该标签，请更换或者升级浏览器4
-		</audio>
-		<audio autoplay="autoplay">
-			您的浏览器不支持该标签，请更换或者升级浏览器5
-		</audio>
-		<audio autoplay="autoplay">
-			您的浏览器不支持该标签，请更换或者升级浏览器6
-		</audio>
-		<audio autoplay="autoplay">
-			您的浏览器不支持该标签，请更换或者升级浏览器7
-		</audio>
+		<div id="audio"></div>
 	</body>
 </html>
